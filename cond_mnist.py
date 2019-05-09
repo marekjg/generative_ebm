@@ -66,7 +66,7 @@ alpha = 1
 lr = 0.001
 batch_size = 128
 
-energy_nn = MnistCondEnergyNN().to(devie)
+energy_nn = MnistCondEnergyNN().to(device)
 optimizer = optim.Adam(energy_nn.parameters())
 replay_buffer = deque(maxlen=1000)
 initialize_replay_buffer(replay_buffer, n=batch_size)

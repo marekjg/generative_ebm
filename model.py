@@ -3,6 +3,10 @@ from torch import nn
 from torch.nn.utils import spectral_norm
 
 
+def swish(x):
+    return x * x.sigmoid()
+
+
 class ResBlock(nn.Module):
     def __init__(self, in_channels, mid_channels, downsample=False):
         super().__init__()
@@ -19,14 +23,14 @@ class ResBlock(nn.Module):
         self.downsample = downsample
 
     def forward(self, x):
-        h = self.conv1(x).relu()
-        h = self.conv2(h).relu()
+        h = swish(self.conv1(x))
+        h = swish(self.conv2(h))
         if self.downsample:
             x = self.avg_pool(x)
         if not self.in_out_match:
             x = self.conv1x1(x)
 
-        return (h + x).relu()
+        return swish(h + x)
 
 
 class MnistEnergyNN(nn.Module):
