@@ -8,7 +8,7 @@ import torch
 from torch import optim
 import torchvision
 
-from model import MnistEnergyNN, MnistCondEnergyNN, SimpleEnergyNN, SimpleCondEnergyNN
+from model import MnistCondEnergyNN
 
 
 def initialize_replay_buffer(replay_buffer, n=32):
